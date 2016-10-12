@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css" media="all">
+  <audio id="sound-file" preload="auto">
+     <source src="quack.mp3" type="audio/mp3">
+  </audio>
+  <audio id="sound-file2" preload="auto">
+     <source src="syouri.mp3" type="audio/mp3">
+  </audio>
+  <audio id="sound-file3" preload="auto">
+     <source src="maketa.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    window.onload = function(){
+    }
+
+    var hoge1 = function tes(){
+         var canvas = document.getElementById('analogclock_sec');
+         if (canvas.getContext){
+             var ctx = canvas.getContext('2d');
+             ctx.fillStyle = 'rgb(255, 255, 255)';
+             ctx.fillRect(0, 0,canvas.width,canvas.height);
+             var now  = new Date();
+             var sec  = now.getSeconds();
+
+             var img = new Image();
+             img.src = 'duck' + sec%2 +'.PNG';
+             img.onload = function () {
+               ctx.save();
+               ctx.translate(canvas.width/2,canvas.height/2);
+               ctx.rotate( sec * 6 * Math.PI / 180 );
+               ctx.drawImage(img,-img.width/2,-img.height-100);
+               ctx.restore();
+               if(sec != 0){
+                 document.getElementById( 'sound-file' ).currentTime = 0;
+                 document.getElementById( 'sound-file' ).play();
+               }
+             }
+
+             ctx.save();
+             ctx.translate(canvas.width/2,canvas.height/2);
+             ctx.rotate( sec * 6 * Math.PI / 180 );
+
+             //円弧1
+             ctx.beginPath();
+             ctx.arc(0,0,100,0,Math.PI*2,false);
+             ctx.closePath();
+             ctx.stroke();
+
+             ctx.beginPath();
+             //始点1
+             ctx.moveTo(0,0);
+             //始点2
+             ctx.lineTo(0,-100);
+
+             ctx.closePath();
+             ctx.stroke();
+             ctx.restore();
+         }
+     }
+
+     //秒時計
+    setInterval(hoge1,1000);
+
+    var hoge2 = function tes(){
+      var canvas = document.getElementById('analogclock_min');
+      if (canvas.getContext){
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = 'rgb(255, 255, 255)';
+          ctx.fillRect(0, 0,canvas.width,canvas.height);
+          var now  = new Date();
+          var sec  = now.getSeconds();
+          var min  = now.getMinutes();
+
+          var img = new Image();
+          img.src = 'televi' + min%2 +'.PNG';
+          img.onload = function () {
+            ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.rotate( min * 6 * Math.PI / 180 );
+            ctx.drawImage(img,-img.width/2,-img.height-100);
+            ctx.restore();
+            if(sec == 0 && min != 0){
+              document.getElementById( 'sound-file2' ).currentTime = 0;
+              document.getElementById( 'sound-file2' ).play();
+            }
+          }
+
+          ctx.save();
+          ctx.translate(canvas.width/2,canvas.height/2);
+          ctx.rotate( min * 6 * Math.PI / 180 );
+
+          //円弧1
+          ctx.beginPath();
+          ctx.arc(0,0,100,0,Math.PI*2,false);
+          ctx.closePath();
+          ctx.stroke();
+
+          ctx.beginPath();
+          //始点1
+          ctx.moveTo(0,0);
+          //始点2
+          ctx.lineTo(0,-100);
+
+          ctx.closePath();
+          ctx.stroke();
+          ctx.restore();
+         }
+     }
+     //分時計
+    setInterval(hoge2,1000);
+
+    var hoge3 = function tes(){
+      var canvas = document.getElementById('analogclock_hour');
+      if (canvas.getContext){
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = 'rgb(255, 255, 255)';
+          ctx.fillRect(0, 0,canvas.width,canvas.height);
+          var now  = new Date();
+          var hour  = now.getHours();
+          var min  = now.getMinutes();
+
+          var img = new Image();
+          img.src = 'duck_si' + hour%2 +'.PNG';
+          img.onload = function () {
+            ctx.save();
+            ctx.translate(canvas.width/2,canvas.height/2);
+            ctx.rotate( hour * 30 * Math.PI / 180 );
+            ctx.drawImage(img,-img.width/2,-img.height-100);
+            ctx.restore();
+            if(min == 0){
+              document.getElementById( 'sound-file3' ).currentTime = 0;
+              document.getElementById( 'sound-file3' ).play();
+            }
+          }
+
+          ctx.save();
+          ctx.translate(canvas.width/2,canvas.height/2);
+          ctx.rotate( hour * 30 * Math.PI / 180 );
+
+          //円弧1
+          ctx.beginPath();
+          ctx.arc(0,0,100,0,Math.PI*2,false);
+          ctx.closePath();
+          ctx.stroke();
+
+          ctx.beginPath();
+          //始点1
+          ctx.moveTo(0,0);
+          //始点2
+          ctx.lineTo(0,-100);
+
+          ctx.closePath();
+          ctx.stroke();
+          ctx.restore();
+         }
+     }
+     //時間時計
+    setInterval(hoge3,1000);
+
+  </script>
+</head>
+<body>
+  <h1>Ducklock</h1>
+  <div id="tyuuou">
+    <canvas id="analogclock_hour" width="500" height="500"></canvas>
+    <canvas id="analogclock_min" width="500" height="500"></canvas>
+    <canvas id="analogclock_sec" width="500" height="500"></canvas>
+    <p><a href="../index.html">戻る</a></p>
+  </div>
+</body>
+</html>
